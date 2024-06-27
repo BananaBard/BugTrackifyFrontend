@@ -8,13 +8,10 @@ import {
   CardTitle,
 } from "../ui/card";
 import { Input } from "../ui/input";
-import InputPassword from "../PasswordInput";
+import InputPassword from "../ui/PasswordInput";
 
-interface LoginCardProps {
-  onLogin: () => void;
-}
 
-const LoginCard = ({ onLogin }: LoginCardProps) => {
+const LoginCard = () => {
   return (
       <Card>
         <CardHeader>

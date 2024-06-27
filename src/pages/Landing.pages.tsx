@@ -15,7 +15,7 @@ const LandingPage = () => {
             our intuitive bug tracking system.
           </p>
           <div className="pt-12 flex gap-x-6 items-center">
-            <Button asChild size="lg" variant="default">
+            <Button asChild size="lg" variant="shine">
               <Link to='/login'>Get Started</Link>
             </Button>
             <Button size="lg" variant="secondary">

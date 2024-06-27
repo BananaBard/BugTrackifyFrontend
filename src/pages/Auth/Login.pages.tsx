@@ -4,7 +4,7 @@ import PageCenter from "@/components/layouts/PageCenter";
 const LoginPage = () => {
   return (
     <PageCenter>
-      <LoginCard onLogin={() => {}} />
+      <LoginCard />
     </PageCenter>
   );
 };

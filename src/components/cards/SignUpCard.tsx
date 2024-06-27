@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
-import InputPassword from "../PasswordInput";
+import InputPassword from "../ui/PasswordInput";
 import { Input } from "../ui/input";
 import { Link } from "react-router-dom";
 

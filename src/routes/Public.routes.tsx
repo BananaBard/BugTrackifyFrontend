@@ -1,6 +1,6 @@
+import LoginPage from "@/pages/Auth/Login.pages"
+import SignUpPage from "@/pages/Auth/SignUp.pages"
 import LandingPage from "@/pages/Landing.pages"
-import LoginPage from "@/pages/Login.pages"
-import SignUpPage from "@/pages/SignUp.pages"
 import { Route, Routes } from "react-router-dom"
 
 const PublicRoutes = () => {

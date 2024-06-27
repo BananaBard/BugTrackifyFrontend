@@ -5,7 +5,6 @@
 - [Features](#features)
 - [Technologies](#technologies)
 - [Roadmap](#roadmap)
-- [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
 - [Installation](#installation)
@@ -37,8 +36,8 @@ BugTrackify is a powerful and intuitive bug tracking system designed to help tea
 ## Roadmap
 ### Checklist
 - [x] Set up project structure
-- [] Implement user authentication
-- [] Create dashboard with project overview
+- [ ] Implement user authentication
+- [ ] Create dashboard with project overview
 - [ ] Develop bug reporting feature
 - [ ] Implement project management
 - [ ] Add user management functionality

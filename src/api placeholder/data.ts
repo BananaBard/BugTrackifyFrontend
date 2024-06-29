@@ -112,3 +112,100 @@ export const incidentReports: Incident[] = [
     ],
   },
 ];
+
+export const user = {
+  userId: "123456",
+  name: "John Doe",
+  email: "johndoe@example.com",
+  password: "encrypted_password",
+  role: "developer",
+  //profilePicture: "path/to/profile_picture.jpg",
+  bio: "Experienced developer specializing in frontend technologies.",
+  contactInformation: {
+    phoneNumber: "+1234567890"
+  },
+  projects: [
+    {
+      projectId: "p001",
+      roleInProject: "Leader"
+    },
+    {
+      projectId: "p002",
+      roleInProject: "Member"
+    }
+  ],
+  reportsCreated: [
+    "r001",
+    "r002",
+    "r003"
+  ],
+  reportsAssigned: [
+    "r004",
+    "r005"
+  ],
+  activityLog: [
+    {
+      activityId: "a001",
+      timestamp: "2024-06-25T14:48:00.000Z",
+      activityDescription: "Created bug report r001"
+    },
+    {
+      activityId: "a002",
+      timestamp: "2024-06-26T09:30:00.000Z",
+      activityDescription: "Commented on bug report r002"
+    }
+  ],
+  permissions: {
+    canCreateProject: true,
+    canAssignBugs: true,
+    canDeleteBugs: false
+  },
+  preferences: {
+    notifications: {
+      email: true,
+      sms: false
+    },
+    displaySettings: {
+      theme: "dark"
+    }
+  }
+};
+
+export const projects = [
+  {
+    projectId: "p001",
+    name: "Project Phoenix",
+    description: "A top-secret project aimed at revolutionizing the industry with cutting-edge technology.",
+    leader: "Alice Johnson",
+    team: ["Alice Johnson", "Bob Smith", "Charlie Brown"],
+    startDate: "2024-01-15",
+    status: "In Progress"
+  },
+  {
+    projectId: "p002",
+    name: "Omega Initiative",
+    description: "An initiative to optimize and enhance the performance of our existing systems.",
+    leader: "David Green",
+    team: ["David Green", "Eva White", "Frank Black"],
+    startDate: "2024-03-10",
+    status: "In Progress"
+  },
+  {
+    projectId: "p003",
+    name: "Apollo Program",
+    description: "Developing a new mobile application for a global audience with innovative features.",
+    leader: "Grace Blue",
+    team: ["Grace Blue", "Harry Red", "Ivy Violet"],
+    startDate: "2024-05-20",
+    status: "Planned"
+  },
+  {
+    projectId: "p004",
+    name: "Vanguard Project",
+    description: "A project focused on implementing advanced security measures across our platforms.",
+    leader: "Jack Brown",
+    team: ["Jack Brown", "Kate Purple", "Leo Orange"],
+    startDate: "2024-07-01",
+    status: "Not Started"
+  }
+];

@@ -2,11 +2,20 @@ import { PropsWithChildren, ReactNode, createContext, useContext, useState } fro
 import { Button } from "../../ui/button"
 import { ArrowLeftIcon, MenuIcon, } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
+import { useNavigate } from "react-router-dom"
 
-const SidebarContext = createContext(false)
+interface SidebarContext {
+    expanded: boolean;
+    activeItem: string;
+    setActiveItem: (item: string) => void;
+}
+
+const SidebarContext = createContext<SidebarContext>({expanded: false, activeItem: '', setActiveItem: () => {}})
 
 export const Sidebar = ({ children }: PropsWithChildren) => {
-    const [expanded, setExpanded] = useState(false)
+    const [expanded, setExpanded] = useState(false);
+    const [activeItem, setActiveItem] = useState('');
+
     return (
         <aside className="h-screen">
             <nav className={`p-4 pb-2 h-full flex flex-col border-r dark:border-neutral-500 shadow-sm shadow-neutral-200 ${expanded ? 'w-60' : 'w-24'}`}>
@@ -16,7 +25,7 @@ export const Sidebar = ({ children }: PropsWithChildren) => {
                         {expanded ? <ArrowLeftIcon /> : <MenuIcon />}
                     </Button>
                 </div>
-                <SidebarContext.Provider value={expanded}>
+                <SidebarContext.Provider value={{expanded, activeItem, setActiveItem}}>
                     <ul className="flex-1">
                         {children}
                     </ul>
@@ -39,22 +48,29 @@ export const Sidebar = ({ children }: PropsWithChildren) => {
 interface SidebarItemProps {
     icon: ReactNode;
     text: string;
-    active?: boolean;
     alert?: boolean;
+    path: string;
 }
 
-export const SidebarItem = ({ icon, text, active, alert }: SidebarItemProps) => {
-    const expanded = useContext(SidebarContext);
+export const SidebarItem = ({ icon, text, alert, path }: SidebarItemProps) => {
+    const {expanded,activeItem, setActiveItem} = useContext(SidebarContext);
+    const navigate = useNavigate();
+    const isActive = activeItem == text
+
+    const onSidebarRedirect = () => {
+        setActiveItem(text);
+        navigate(path.toLowerCase())
+    }
 
     return (
-        <li className={`relative flex items-center py-2 px-3 my-1 
+        <li onClick={onSidebarRedirect} className={`relative flex items-center py-2 px-3 my-1 
         rounded-sm cursor-pointer transition-colors
-        ${active ? "bg-gradient-to-tr from-primary/50 to-primary font-medium"
+        ${isActive ? "bg-gradient-to-tr from-primary/50 to-primary font-medium"
                 : "hover:bg-primary/50"}
         `
         }>
             <span className={`${expanded ? "" : "mx-auto"}`}>
-            {icon}
+                {icon}
             </span>
             <span className={`overflow-hidden transition-all ${expanded ? 'ml-3' : 'w-0'}`}>{text}</span>
             {alert && (

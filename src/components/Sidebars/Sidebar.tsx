@@ -1,11 +1,12 @@
 import { useMediaQuery } from 'usehooks-ts'
-import { DesktopSidebar, SidebarItem } from './DesktopSidebar';
+import { DesktopSidebar } from './DesktopSidebar';
 import { BarChart, Bug, Folder, LayoutDashboardIcon, Settings } from 'lucide-react';
+import MobileSidebar from './MobileSidebar';
+import { SidebarItem } from './SidebarItem';
 
 const Sidebar = () => {
     const isDesktop = useMediaQuery('(min-width: 640px)');
 
-    console.log(isDesktop)
     if (isDesktop) return (
         <DesktopSidebar>
             <SidebarItem text='Dashboard' icon={<LayoutDashboardIcon size={20} />} path="dashboard" />
@@ -16,7 +17,7 @@ const Sidebar = () => {
         </DesktopSidebar>
     )
 
-    return <p>Mobile</p>
+    return <MobileSidebar></MobileSidebar>
 
 }
 

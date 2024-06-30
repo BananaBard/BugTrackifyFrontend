@@ -11,7 +11,7 @@ const ProjectsPage = () => {
     const history = useHistory();
 
     return (
-        <main className='p-8 w-full h-screen bg-neutral-100 dark:bg-neutral-800'>
+        <main className='px-6 py-20 sm:p-8 w-full h-screen bg-neutral-100 dark:bg-neutral-800'>
             <header className='flex justify-between items-center'>
                 <DashboardBreadcrum history={history} />
                 <div className="relative ml-auto flex-1 md:grow-0">

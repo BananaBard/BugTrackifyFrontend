@@ -1,28 +1,8 @@
+type Status = "open" | "inprogress" | "resolved" | "closed" | "deffered" | "duplicated" | "reopen";
 
-export enum Status {
-  Open = "Open",
-  InProgress = "In Progress",
-  Resolved = "Resolved",
-  Closed = "Closed",
-  Reopened = "Reopened",
-  Deferred = "Deferred",
-  Duplicate = "Duplicate"
-}
+type Priority = "low" | "medium" | "high" | "urgent"
 
-export enum Priority {
-  Low = "Low",
-  Medium = "Medium",
-  High = "High",
-  Urgent = "Urgent"
-}
-
-export enum Severity {
-  Trivial = "Trivial",
-  Minor = "Minor",
-  Major = "Major",
-  Critical = "Critical",
-  Blocker = "Blocker"
-}
+type Severity = "minor" | "major" | "critical" | "blocker"
 
 export type Incident = {
   id: string;

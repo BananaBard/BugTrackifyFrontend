@@ -8,7 +8,7 @@ export const DesktopSidebar = ({ children }: PropsWithChildren) => {
     const {expanded, setExpanded} = useSidebar();
 
     return (
-        <aside className="h-screen">
+        <aside className="h-screen fixed">
             <nav className={`px-4 py-6 pb-2 h-full flex flex-col border-r dark:border-neutral-500 shadow-sm shadow-neutral-200 ${expanded ? 'w-60' : 'w-24 items-center'}`}>
                 <div className="flex gap-2 items-center justify-between mb-4">
                     <h2 className={`overflow-hidden transition-all ${expanded ? 'block' : 'hidden'}`}>🐞 BugTrackify</h2>

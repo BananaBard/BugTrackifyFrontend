@@ -2,10 +2,11 @@ import { MenuIcon, XIcon } from "lucide-react"
 import { Button } from "../ui/button"
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "../ui/sheet"
 import { ModeToggle } from "../ModeToggle"
+import { PropsWithChildren } from "react"
 
-const MobileSidebar = () => {
+const MobileSidebar = ({children}: PropsWithChildren) => {
     return (
-        <div className="absolute top-3 left-3">
+        <div className="top-3 left-3 fixed">
             <Sheet>
                 <SheetTrigger asChild>
                     <Button variant="outline" className="mx-2 my-4">
@@ -24,6 +25,7 @@ const MobileSidebar = () => {
                             </SheetClose>
                         </div>
                     </div>
+                    {children}
                 </SheetContent>
             </Sheet>
         </div>

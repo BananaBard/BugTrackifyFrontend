@@ -17,7 +17,13 @@ const Sidebar = () => {
         </DesktopSidebar>
     )
 
-    return <MobileSidebar></MobileSidebar>
+    return <MobileSidebar>
+        <SidebarItem text='Dashboard' icon={<LayoutDashboardIcon size={20} />} path="dashboard" />
+            <SidebarItem text='Statistics' icon={<BarChart size={20} />} path="dashboard/statistics" />
+            <SidebarItem text='Projects' icon={<Folder size={20} />} path="dashboard/projects" />
+            <SidebarItem text='Incidents' icon={<Bug size={20} />} alert path="dashboard/incidents" />
+            <SidebarItem text='Settings' icon={<Settings size={20} />} path="dashboard/settings" />
+    </MobileSidebar>
 
 }
 

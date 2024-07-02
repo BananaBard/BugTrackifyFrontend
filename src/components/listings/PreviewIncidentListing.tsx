@@ -7,7 +7,7 @@ interface PreviewProps {
 
 const PreviewIncidentListing = ({incidents}: PreviewProps) => {
     return (
-        <ul>
+        <ul className="grid grid-cols-4 gap-x-2 gap-y-2">
             {incidents.map((i) => (
           <PreviewIncidentCard incident={i}/>
         ))}

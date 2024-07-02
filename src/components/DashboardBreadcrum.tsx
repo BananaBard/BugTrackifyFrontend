@@ -40,7 +40,7 @@ const DashboardBreadcrum = ({ history }: BreadcrumbProps) => {
     }
 
     return (
-        <Breadcrumb className='mb-4'>
+        <Breadcrumb>
             <BreadcrumbList>
                 <BreadcrumbItem>
                     <BreadcrumbLink asChild>

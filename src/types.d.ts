@@ -1,3 +1,29 @@
+
+export enum Status {
+  Open = "Open",
+  InProgress = "In Progress",
+  Resolved = "Resolved",
+  Closed = "Closed",
+  Reopened = "Reopened",
+  Deferred = "Deferred",
+  Duplicate = "Duplicate"
+}
+
+export enum Priority {
+  Low = "Low",
+  Medium = "Medium",
+  High = "High",
+  Urgent = "Urgent"
+}
+
+export enum Severity {
+  Trivial = "Trivial",
+  Minor = "Minor",
+  Major = "Major",
+  Critical = "Critical",
+  Blocker = "Blocker"
+}
+
 export type Incident = {
   id: string;
   title: string;
@@ -5,9 +31,9 @@ export type Incident = {
   creationDate: string;
   assignedTo: string;
   createdBy: string;
-  tag: string;
-  priority: string;
-  severity: string;
+  status: Status;
+  priority: Priority;
+  severity: Severity;
   description: string;
   stepsToReproduce: string[];
   actualResult: string;
@@ -24,3 +50,15 @@ export type UserComment = {
 export interface IncidentCardProps {
   incident: Incident
 }
+
+export type Project = {
+  id: string;
+  title: string;
+  description: string;
+  leader: string;
+  team: string[];
+  startDate: string;
+  status: string;
+  totalIncidents: number;
+}
+

@@ -9,7 +9,7 @@ const PreviewIncidentListing = ({incidents}: PreviewProps) => {
     return (
         <ul className="grid grid-cols-4 gap-x-2 gap-y-2">
             {incidents.map((i) => (
-          <PreviewIncidentCard incident={i}/>
+          <PreviewIncidentCard key={i.id} incident={i}/>
         ))}
         </ul>
     )

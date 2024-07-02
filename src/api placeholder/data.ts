@@ -1,4 +1,4 @@
-import { Incident, Priority, Project, Severity, Status } from "@/types.d";
+import { Incident, Project} from "@/types.d";
 
 
 export const incidentsReports: Incident[] = [

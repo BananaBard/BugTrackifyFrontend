@@ -1,35 +1,46 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
+import { type Project } from '../../types';
+
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card"
 import { Badge } from "../ui/badge"
 import { Button } from "../ui/button"
-import { MoveHorizontalIcon } from "lucide-react"
+import { useNavigate } from 'react-router-dom';
 
-const ProjectCard = () => {
+
+interface ProjectCardProps {
+    project: Project;
+}
+
+const ProjectCard = ({ project }: ProjectCardProps) => {
+    const navigate = useNavigate();
+
+    const handleOpenProject = () => {
+        if (project.id) {
+            navigate(`/dashboard/projects/:${project.id}`)
+        }
+    }
+
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Project A</CardTitle>
-                <CardDescription>Description of Project A</CardDescription>
+                <CardTitle>{project.title}</CardTitle>
+                <CardDescription>{project.description}</CardDescription>
             </CardHeader>
             <CardContent>
                 <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                        <Avatar>
-                            <AvatarImage src="/placeholder-user.jpg" />
-                            <AvatarFallback>JD</AvatarFallback>
-                        </Avatar>
-                        <div>
-                            <div className="font-medium">John Doe</div>
-                            <div className="text-sm text-muted-foreground">Project Leader</div>
-                        </div>
+                    <div className='flex flex-col items-start gap-2'>
+                        <p className="font-medium">{project.leader}</p>
+                        <p className="text-sm text-muted-foreground">Project Leader</p>
                     </div>
-                    <Badge variant="secondary">Active</Badge>
+                    <div className='flex flex-col items-end gap-2'>
+                        <Badge variant="secondary" className='w-fit'>{project.status}</Badge>
+                        <p className='text-md'><span className='text-sm text-neutral-400'>Start date: </span>{project.startDate}</p>
+                    </div>
                 </div>
             </CardContent>
-            <CardFooter className="flex justify-end">
-                <Button variant="ghost" size="icon">
-                    <MoveHorizontalIcon className="h-4 w-4" />
-                    <span className="sr-only">More actions</span>
+            <CardFooter className="flex justify-between items-center">
+                <p>Total incidents: {project.totalIncidents}</p>
+                <Button onClick={() => handleOpenProject()} variant="outline">
+                    View Project
                 </Button>
             </CardFooter>
         </Card>

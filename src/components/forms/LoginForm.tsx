@@ -11,7 +11,13 @@ const LoginForm = () => {
       <p className="text-center text-sm text-muted-foreground">Don't have an account? <Link to='/signup' className="text-foreground font-medium underline">Sign up</Link></p>
       <Input className="mt-2" type="email" id="email" placeholder="Your email" />
       <InputPassword className="mt-2" id="password" placeholder="Your password" />
-      <Button className="w-full mt-4">Login</Button>
+      <Button className="w-full my-4">Log in</Button>
+      <div className="flex gap-1 justify-between items-center w-full mb-4">
+        <hr className="bg-neutral-300 h-[1px] w-full"/>
+        <span>or</span>
+        <hr className="bg-neutral-300 h-[1px] w-full"/>
+      </div>
+      <Button variant='outline' type="button" className="w-full">Log in with Github</Button>
     </form>
   );
 };

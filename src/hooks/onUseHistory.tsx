@@ -4,15 +4,14 @@ const useHistory = (): string[] => {
     const {pathname} =  useLocation()
     const history = pathname.trim().split('/').filter(i => i != "");
 
-   /*  if (history.length > 3) {
-        history.pop()
+    if (history.length > 2) {
         history[2] = cleanPath(history[2])
     }
-     */
+    
     return history
 }
 
-/* const cleanPath = (path: string): string => {
+const cleanPath = (path: string): string => {
     let cleanedPath = path;
 
     if (cleanedPath.endsWith(':')) {
@@ -23,6 +22,6 @@ const useHistory = (): string[] => {
     }
 
     return decodeURIComponent(cleanedPath)
-} */
+}
 
 export default useHistory

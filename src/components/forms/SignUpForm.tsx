@@ -11,7 +11,7 @@ const SignUpForm = () => {
       <Input className="mt-2" type="email" id="email" placeholder="Your email" />
       <InputPassword className="mt-2" id="password" placeholder="Your password" />
       <InputPassword className="mt-2" id="repeatpassword" placeholder="Repeat your password" />
-      <Button className="w-full mt-4">Login</Button>
+      <Button className="w-full mt-4">Create account</Button>
     </form>
   );
 };

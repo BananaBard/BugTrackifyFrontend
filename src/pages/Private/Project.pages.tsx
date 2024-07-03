@@ -26,8 +26,20 @@ const ProjectPage = () => {
                 </Button>
             </header>
             <div className="flex gap-4">
-                <div className="w-1/4">
-                    <p>Project leader</p>
+                <div className="w-1/4 flex flex-col gap-2">
+                    <div className="w-full border rounded-md py-6 px-4 dark:bg-stone-900">
+                        <h3 className="text-xl font-medium">Leader</h3>
+                        <p>{data.leader}</p>
+                    </div>
+                    <div className="w-full border rounded-md py-6 px-4 dark:bg-stone-900">
+                        <h4 className="text-xl mb-2 font-medium">Members</h4>
+
+                        <ul>
+                            {data.team.map(member => {
+                                return <li key={member}>{member}</li>
+                            })}
+                        </ul>
+                    </div>
                 </div>
                 <div className="w-3/4">
                     <PreviewIncidentListing incidents={bugs} />

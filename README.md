@@ -36,13 +36,12 @@ BugTrackify is a powerful and intuitive bug tracking system designed to help tea
 ## Roadmap
 ### Checklist
 - [x] Set up project structure
+- [x] Create dashboard with project overview
 - [ ] Implement user authentication
-- [ ] Create dashboard with project overview
 - [ ] Develop bug reporting feature
-- [ ] Implement project management
+- [ ] Implement project creation
 - [ ] Add user management functionality
 - [ ] Integrate real-time notifications
-- [ ] Deploy application
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt) file for more details.

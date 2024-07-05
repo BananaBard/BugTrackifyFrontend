@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { IncidentCardProps } from "@/types"
-import { CheckIcon, GaugeIcon, OctagonAlertIcon } from "lucide-react"
+import StatusBadgeSelector from "./StatusBadgeSelector"
+import PriorityBadgeSelector from "./PriorityBadgeSelector"
+import SeverityBadgeSelector from "./SeverityBadgeSelector"
 
 const PreviewIncidentCard = ({ incident }: IncidentCardProps) => {
   return (
@@ -12,18 +14,9 @@ const PreviewIncidentCard = ({ incident }: IncidentCardProps) => {
             <CardTitle className="text-lg">#{incident.id}</CardTitle>
           </div>
           <div className="flex items-center gap-2 mt-2">
-            <div className="inline-flex items-center rounded-md bg-green-500 px-2 py-1 text-xs font-medium text-green-50 order-3">
-              <CheckIcon className="h-3 w-3 mr-1" />
-              {incident.status}
-            </div>
-            <div className="inline-flex items-center rounded-md bg-yellow-500 px-2 py-1 text-xs font-medium text-yellow-50 order-2">
-              <GaugeIcon className="h-3 w-3 mr-1" />
-              {incident.priority}
-            </div>
-            <div className="inline-flex items-center rounded-md bg-red-500 px-2 py-1 text-xs font-medium text-red-50 order-1">
-              <OctagonAlertIcon className="h-3 w-3 mr-1" />
-              {incident.severity}
-            </div>
+            <StatusBadgeSelector status={incident.status}/>
+            <PriorityBadgeSelector priority={incident.priority}/>
+            <SeverityBadgeSelector severity={incident.severity}/>
           </div>
         </div>
         <CardDescription>{incident.title}</CardDescription>

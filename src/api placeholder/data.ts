@@ -1,4 +1,4 @@
-import { Incident, Priority, Project, Severity, Status } from "@/types.d";
+import { Incident, Project} from "@/types.d";
 
 
 export const incidentsReports: Incident[] = [
@@ -9,9 +9,9 @@ export const incidentsReports: Incident[] = [
     creationDate: "2024-06-01",
     assignedTo: "Juan Pérez",
     createdBy: "Ana García",
-    status: Status.Resolved,
-    priority: Priority.High,
-    severity: Severity.Critical,
+    status: 'closed',
+    priority: 'high',
+    severity: 'critical',
     description: "When trying to save changes in the user profile, an error message is displayed and changes are not saved.",
     stepsToReproduce: [
       "Log in to the application.",
@@ -35,9 +35,9 @@ export const incidentsReports: Incident[] = [
     creationDate: "2024-06-05",
     assignedTo: "Carlos Ruiz",
     createdBy: "Elena Fernández",
-    status: Status.Open,
-    priority: Priority.Urgent,
-    severity: Severity.Blocker,
+    status: 'open',
+    priority: 'urgent',
+    severity: 'blocker',
     description: "The login page does not load when accessed.",
     stepsToReproduce: [
       "Navigate to the login page.",
@@ -59,9 +59,9 @@ export const incidentsReports: Incident[] = [
     creationDate: "2024-06-10",
     assignedTo: "María López",
     createdBy: "Luis Martínez",
-    status: Status.InProgress,
-    priority: Priority.High,
-    severity: Severity.Major,
+    status: 'inprogress',
+    priority: 'high',
+    severity: 'major',
     description: "User data is not syncing between different devices.",
     stepsToReproduce: [
       "Log in to the application on Device A.",
@@ -84,9 +84,9 @@ export const incidentsReports: Incident[] = [
     creationDate: "2024-06-12",
     assignedTo: "Pedro Sánchez",
     createdBy: "Lucía Romero",
-    status: Status.Open,
-    priority: Priority.Urgent,
-    severity: Severity.Blocker,
+    status: 'open',
+    priority: 'urgent',
+    severity: 'blocker',
     description: "The application crashes immediately after startup.",
     stepsToReproduce: [
       "Open the application.",
@@ -108,9 +108,9 @@ export const incidentsReports: Incident[] = [
     creationDate: "2024-06-15",
     assignedTo: "Raúl Torres",
     createdBy: "Sara Díaz",
-    status: Status.InProgress,
-    priority: Priority.Medium,
-    severity: Severity.Major,
+    status: 'inprogress',
+    priority: 'medium',
+    severity: 'major',
     description: "The dashboard page loads very slowly.",
     stepsToReproduce: [
       "Log in to the web application.",
@@ -132,9 +132,9 @@ export const incidentsReports: Incident[] = [
     creationDate: "2024-06-18",
     assignedTo: "Laura Jiménez",
     createdBy: "Miguel Ángel",
-    status: Status.Resolved,
-    priority: Priority.Low,
-    severity: Severity.Minor,
+    status: 'resolved',
+    priority: 'low',
+    severity: 'minor',
     description: "The help page returns a 404 error.",
     stepsToReproduce: [
       "Navigate to the support portal.",
@@ -156,9 +156,9 @@ export const incidentsReports: Incident[] = [
     creationDate: "2024-06-20",
     assignedTo: "David Ortiz",
     createdBy: "Laura Martín",
-    status: Status.Open,
-    priority: Priority.High,
-    severity: Severity.Major,
+    status: 'open',
+    priority: 'high',
+    severity: 'major',
     description: "Notifications are not being sent to users.",
     stepsToReproduce: [
       "Trigger a notification event.",
@@ -180,9 +180,9 @@ export const incidentsReports: Incident[] = [
     creationDate: "2024-06-22",
     assignedTo: "Sandra Rodríguez",
     createdBy: "José Antonio",
-    status: Status.Open,
-    priority: Priority.Medium,
-    severity: Severity.Major,
+    status: 'open',
+    priority: 'medium',
+    severity: 'major',
     description: "The totals are calculated incorrectly in the finance reports.",
     stepsToReproduce: [
       "Generate a finance report.",
@@ -197,102 +197,6 @@ export const incidentsReports: Incident[] = [
       }
     ]
   },
-  {
-    id: "9",
-    title: "Broken link in email notifications",
-    project: "Email Service",
-    creationDate: "2024-06-25",
-    assignedTo: "Marta Navarro",
-    createdBy: "Javier Hernández",
-    status: Status.Open,
-    priority: Priority.Low,
-    severity: Severity.Minor,
-    description: "Links in the email notifications are broken.",
-    stepsToReproduce: [
-      "Receive an email notification.",
-      "Click on the link in the email."
-    ],
-    actualResult: "The link does not work.",
-    expectedResult: "The link should redirect to the correct page.",
-    comments: [
-      {
-        creator: "Javier Hernández",
-        content: "This issue started after the email template update."
-      }
-    ]
-  },
-  {
-    id: "10",
-    title: "Incorrect user role assignment",
-    project: "User Management System",
-    creationDate: "2024-06-27",
-    assignedTo: "Luis Romero",
-    createdBy: "Ana García",
-    status: Status.InProgress,
-    priority: Priority.High,
-    severity: Severity.Critical,
-    description: "Users are assigned incorrect roles upon creation.",
-    stepsToReproduce: [
-      "Create a new user.",
-      "Check the assigned role."
-    ],
-    actualResult: "The user is assigned an incorrect role.",
-    expectedResult: "The user should be assigned the correct role.",
-    comments: [
-      {
-        creator: "Ana García",
-        content: "This is causing security issues."
-      }
-    ]
-  },
-  {
-    id: "11",
-    title: "Page layout issues in mobile view",
-    project: "Responsive Design",
-    creationDate: "2024-06-28",
-    assignedTo: "Pedro Sánchez",
-    createdBy: "Elena Fernández",
-    status: Status.Open,
-    priority: Priority.Medium,
-    severity: Severity.Major,
-    description: "The page layout is broken in mobile view.",
-    stepsToReproduce: [
-      "Open the application on a mobile device.",
-      "Navigate to any page."
-    ],
-    actualResult: "The layout is not responsive.",
-    expectedResult: "The layout should adjust to mobile screens.",
-    comments: [
-      {
-        creator: "Elena Fernández",
-        content: "Users are experiencing usability issues."
-      }
-    ]
-  },
-  {
-    id: "12",
-    title: "Search function not returning results",
-    project: "Search Module",
-    creationDate: "2024-06-30",
-    assignedTo: "Carlos Ruiz",
-    createdBy: "Lucía Romero",
-    status: Status.Open,
-    priority: Priority.High,
-    severity: Severity.Critical,
-    description: "The search function does not return any results.",
-    stepsToReproduce: [
-      "Enter a search query.",
-      "Click on the search button."
-    ],
-    actualResult: "No results are returned.",
-    expectedResult: "Relevant results should be displayed.",
-    comments: [
-      {
-        creator: "Lucía Romero",
-        content: "Search functionality is critical for user navigation."
-      }
-    ]
-  }
 ];
 
 export const user = {

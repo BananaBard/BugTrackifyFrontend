@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { InputHTMLAttributes, useState } from "react";
 import { Button } from "./button";
 import { Input } from "./input";
 import { EyeIcon } from "lucide-react";
 
-interface InputPasswordProps {
+interface InputPasswordProps extends InputHTMLAttributes<HTMLInputElement>{
   id: string;
   placeholder: string;
   className?: string;

@@ -1,19 +1,82 @@
-import InputPassword from "../ui/PasswordInput";
 import { Input } from "../ui/input";
-import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
+import { z } from 'zod';
+import { useForm } from "react-hook-form";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
+import { useAuth } from "@/context/AuthContext";
+
+
+const formSchema = z.object({
+  email: z.string().email('Invalidad email address'),
+  password: z.string().min(6, 'Password must be 6 characters long').max(32, 'Can not be longer than 32 characters'),
+  password2: z.string()
+}).refine((data) => data.password === data.password2, {
+  message: "Passwords must match",
+  path: ["password2"]
+})
 
 const SignUpForm = () => {
-  return (
-    <form className="flex flex-col items-center gap-2">
-      <h1 className="text-center text-3xl font-bold tracking-wide">Start tracking with us today!</h1>
-      <p className="text-center text-sm text-muted-foreground">Already have an account? <Link to='/login' className="text-foreground font-medium underline">Log in</Link></p>
-      <Input className="mt-2" type="email" id="email" placeholder="Your email" />
-      <InputPassword className="mt-2" id="password" placeholder="Your password" />
-      <InputPassword className="mt-2" id="repeatpassword" placeholder="Repeat your password" />
-      <Button className="w-full mt-4">Create account</Button>
-    </form>
-  );
-};
+  const {signUpWithEmail} = useAuth();
 
-export default SignUpForm
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    console.log(values)
+    const body = {email: values.email, password: values.password}
+    signUpWithEmail(body);
+  }
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+      password2: ''
+    }
+  })
+
+  return (
+
+    <Form {...form}>
+      <form onSubmit={(form.handleSubmit(onSubmit))} className="space-y-4 px-20">
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder="Your email..." {...field}/>
+              </FormControl>
+              {/* <FormDescription>The email you will use to log in</FormDescription> */}
+              <FormMessage />
+            </FormItem>
+          )}
+        >
+        </FormField>
+        <FormField control={form.control} name='password' render={({field}) => (
+          <FormItem>
+            <FormLabel>Password</FormLabel>
+            <FormControl>
+              <Input placeholder="Password" type="password" {...field}/>
+            </FormControl>
+            <FormDescription>Between 6/32 characters</FormDescription>
+            <FormMessage/>
+          </FormItem>
+        )}>        
+        </FormField>
+        <FormField control={form.control} name='password2' render={({field}) => (
+          <FormItem>
+            <FormLabel>Confirm Password</FormLabel>
+            <FormControl>
+              <Input placeholder="Confirm your password" type="password" {...field}/>
+            </FormControl>
+            <FormMessage/>
+          </FormItem>
+        )}></FormField>
+        <FormMessage/>
+        <Button type="submit" className="w-full mt-4">Create account</Button>
+      </form>
+    </Form>
+  )
+}
+
+  export default SignUpForm;

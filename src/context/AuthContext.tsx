@@ -7,13 +7,15 @@ interface AuthContext {
     user: User | null;
     token: string | null;
     signOut: () => Promise<void>;
-    signUpWithEmail: ({ email, password }: SignUpWithEmail) => Promise<void>;
+    signUpWithEmail: ({ email, password, fullname, role }: SignUpWithEmail) => Promise<void>;
     updateUserData: () => Promise<void>;
 }
 
 interface SignUpWithEmail {
     email: string;
     password: string;
+    fullname: string;
+    role: 'Developer' | 'Tester' | 'Project Leader';
 }
 
 const authContext = createContext<AuthContext>({
@@ -32,11 +34,12 @@ function AuthProvider({ children }: PropsWithChildren) {
         // Logica signout
     }
 
-    const signUpWithEmail = async ({ email, password }: SignUpWithEmail) => {
+    const signUpWithEmail = async ({ email, password, fullname, role }: SignUpWithEmail) => {
         try {
-            const data = await signUpWithEmailService({ email, password });
+            const data = await signUpWithEmailService({ email, password, fullname, role });
             console.log(data)
-            setToken(data.session.access_token);
+            setToken(data.token);
+            setUser(data.user);
         } catch(error) {
             throw new Error(getErrorMessage(error))
         }

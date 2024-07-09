@@ -4,12 +4,13 @@ import {
   NavigationMenuList,
 } from "@radix-ui/react-navigation-menu";
 import { ModeToggle } from "../../ModeToggle";
-import { buttonVariants } from "../../ui/button";
+import { Button, buttonVariants } from "../../ui/button";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/context/AuthContext";
 
 const Header = () => {
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
+  console.log('is user logged: ', user)
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 py-4 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex justify-between items-center max-w-6xl mx-auto">
@@ -22,7 +23,7 @@ const Header = () => {
           </NavigationMenuList>
 
           {
-            user && (
+            (user != null) && (
               <NavigationMenuList>
                 <NavigationMenuItem>
                   <Link to="/dashboard">Dashboard</Link>
@@ -31,11 +32,25 @@ const Header = () => {
 
             )
           }
+
         </NavigationMenu>
         <div className="flex gap-x-6">
-          <Link to="/signup" className={buttonVariants({ variant: "outline" })}>
-            Get Started
-          </Link>
+          {
+            (user === null) ? (
+              <>
+                <Link to="/signup" className={buttonVariants({ variant: "default" })}>
+                  Get Started
+                </Link>
+                <Link to="/login" className={buttonVariants({ variant: "outline" })}>
+                  Log in
+                </Link>
+              </>
+            ) :
+              <Button variant='outline' onClick={signOut}>
+                Sign Out
+              </Button>
+          }
+
           <ModeToggle />
         </div>
       </div>

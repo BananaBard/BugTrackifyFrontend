@@ -1,25 +1,68 @@
-import { Link } from "react-router-dom";
 import { Input } from "../ui/input";
-import InputPassword from "../ui/PasswordInput";
 import { Button } from "../ui/button";
+import { z } from 'zod';
+import { useForm } from "react-hook-form";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
+import { useAuth } from "@/context/AuthContext";
 
+
+const formSchema = z.object({
+  email: z.string().email('Invalidad email address'),
+  password: z.string().min(6, 'Password must be 6 characters long').max(32, 'Can not be longer than 32 characters'),
+ 
+});
 
 const LoginForm = () => {
+  const { logInWithEmail } = useAuth();
+
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    const body = {
+      email: values.email,
+      password: values.password,
+    }
+    logInWithEmail(body);
+  }
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    }
+  })
+
   return (
-    <form className="flex flex-col items-center gap-2">
-      <h1 className="text-center text-3xl font-bold tracking-wide">Login to Bugtrackify</h1>
-      <p className="text-center text-sm text-muted-foreground">Don't have an account? <Link to='/signup' className="text-foreground font-medium underline">Sign up</Link></p>
-      <Input className="mt-2" type="email" id="email" placeholder="Your email" />
-      <InputPassword className="mt-2" id="password" placeholder="Your password" />
-      <Button className="w-full my-4">Log in</Button>
-      <div className="flex gap-1 justify-between items-center w-full mb-4">
-        <hr className="bg-neutral-300 h-[1px] w-full"/>
-        <span>or</span>
-        <hr className="bg-neutral-300 h-[1px] w-full"/>
-      </div>
-      <Button variant='outline' type="button" className="w-full">Log in with Github</Button>
-    </form>
-  );
-};
+
+    <Form {...form}>
+      <form onSubmit={(form.handleSubmit(onSubmit))} className="space-y-4 px-20">
+        <FormField
+          control={form.control}
+          name="email"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Email</FormLabel>
+              <FormControl>
+                <Input placeholder="Your email" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        >
+        </FormField>
+        <FormField control={form.control} name='password' render={({ field }) => (
+          <FormItem>
+            <FormLabel>Password</FormLabel>
+            <FormControl>
+              <Input placeholder="Password" type="password" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}>
+        </FormField>
+        <Button type="submit" className="w-full mt-4">Login</Button>
+      </form>
+    </Form>
+  )
+}
 
 export default LoginForm;

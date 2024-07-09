@@ -19,16 +19,11 @@ const signUpWithEmailService = async({email, password, role, fullname}: SignUpWi
             }),
             headers: {
                 "Content-Type": "application/json"
-            }
+            },
+            credentials: 'include'
         })
         const data = await res.json();
-        
-        if (res.ok) {
-            const maxAge = data.expires_in
-            document.cookie = `accessToken=${data.accessToken}; Max-Age=${maxAge}; Secure; HttpOnly; SameSite=Strict`;
-        } else {
-            throw new Error(data.message || 'Failed to sign up')
-        }
+
         return data
     } catch (error) {
         throw new Error(getErrorMessage(error))

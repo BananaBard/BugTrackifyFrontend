@@ -1,14 +1,17 @@
 import getErrorMessage from "@/lib/utils";
+import loginWithEmailService from "@/services/auth/logInWithEmail.service";
+import signOutService from "@/services/auth/signOut.service";
 import signUpWithEmailService from "@/services/auth/signUpWithEmail";
-import { User } from "@/types";
+import { User, LoginWithEmailArgs } from "@/types";
 import { PropsWithChildren, createContext, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface AuthContext {
     user: User | null;
     token: string | null;
     signOut: () => Promise<void>;
     signUpWithEmail: ({ email, password, fullname, role }: SignUpWithEmail) => Promise<void>;
-    updateUserData: () => Promise<void>;
+    logInWithEmail: ({email, password}: LoginWithEmailArgs) => Promise<void>;
 }
 
 interface SignUpWithEmail {
@@ -23,34 +26,52 @@ const authContext = createContext<AuthContext>({
     token: null,
     signOut: async () => { },
     signUpWithEmail: async () => { },
-    updateUserData: async () => {}
+    logInWithEmail: async () => {}
 });
 
 function AuthProvider({ children }: PropsWithChildren) {
+    const navigate = useNavigate()
     const [user, setUser] = useState<AuthContext['user']>(null);
     const [token, setToken] = useState<AuthContext['token']>(null);
 
     const signOut = async () => {
-        // Logica signout
+        try {
+            const res = await signOutService();
+            if (res){
+                setToken(null);
+                setUser(null);
+                navigate('/');
+            };
+        }catch(error) {
+            throw new Error(getErrorMessage(error));
+        }
     }
 
     const signUpWithEmail = async ({ email, password, fullname, role }: SignUpWithEmail) => {
         try {
-            const data = await signUpWithEmailService({ email, password, fullname, role });
-            console.log(data)
-            setToken(data.token);
-            setUser(data.user);
+            const res = await signUpWithEmailService({ email, password, fullname, role });
+            setToken(res.token);
+            setUser(res.user[0]);
+            navigate('/dashboard');
         } catch(error) {
             throw new Error(getErrorMessage(error))
         }
     }
 
-    const updateUserData = async() => {
-
+    const logInWithEmail = async({email, password}: LoginWithEmailArgs) => {
+        try {
+            const res = await loginWithEmailService({email, password});
+            const data = await res.json();
+            setToken(data.token);
+            setUser(data.user[0]);
+            navigate('/dashboard');
+        } catch(error) {
+            throw new Error(getErrorMessage(error))
+        }
     }
 
     return (
-        <authContext.Provider value={{ user, token, signOut, signUpWithEmail, updateUserData }}>
+        <authContext.Provider value={{ user, token, signOut, signUpWithEmail, logInWithEmail }}>
             {children && children}
         </authContext.Provider>
     )

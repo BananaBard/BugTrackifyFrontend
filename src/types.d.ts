@@ -42,3 +42,21 @@ export type Project = {
   totalIncidents: number;
 }
 
+export type User = {
+  createdat: string
+  email: string
+  fullname: string | null
+  id: string
+  role: string | null
+  totalincidents: number | null
+  totalprojects: number | null
+  updatedat: string | null
+}
+
+
+//Function arguments
+
+export interface LoginWithEmailArgs {
+  email: string;
+  password: string;
+}

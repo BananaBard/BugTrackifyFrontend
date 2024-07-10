@@ -3,12 +3,15 @@ import App from "./App";
 import "./style.css";
 import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeContext";
+import AuthProvider from "./context/AuthContext";
 
 const root = createRoot(document.getElementById("app")!);
 root.render(
   <BrowserRouter>
     <ThemeProvider>
-      <App />
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </ThemeProvider>
   </BrowserRouter>
 );

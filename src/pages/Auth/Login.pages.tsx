@@ -1,10 +1,10 @@
-import LoginCard from "@/components/cards/LoginCard";
+import LoginForm from "@/components/forms/LoginForm";
 import PageCenter from "@/components/layouts/PageCenter";
 
 const LoginPage = () => {
   return (
-    <PageCenter>
-      <LoginCard />
+    <PageCenter >
+      <LoginForm/>
     </PageCenter>
   );
 };

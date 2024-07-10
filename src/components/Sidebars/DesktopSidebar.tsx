@@ -1,11 +1,13 @@
 import { PropsWithChildren } from "react"
 import { Button } from "../ui/button"
-import { ArrowLeftIcon, MenuIcon, } from "lucide-react"
+import { ArrowLeftIcon, LogOutIcon, MenuIcon, } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar"
 import { useSidebar } from "@/context/SidebarContext"
+import { useAuth } from "@/context/AuthContext"
 
 export const DesktopSidebar = ({ children }: PropsWithChildren) => {
-    const {expanded, setExpanded} = useSidebar();
+    const { user, signOut } = useAuth();
+    const { expanded, setExpanded } = useSidebar();
 
     return (
         <aside className="h-screen fixed bg-background">
@@ -16,19 +18,24 @@ export const DesktopSidebar = ({ children }: PropsWithChildren) => {
                         {expanded ? <ArrowLeftIcon /> : <MenuIcon />}
                     </Button>
                 </div>
-                    <ul className="flex-1">
-                        {children}
-                    </ul>
+                <ul className="flex-1">
+                    {children}
+                </ul>
                 <div className={`border-t dark:border-neutral-500 flex p-3 items-center gap-4 overflow-hidden transition-all ${expanded ? "w-52" : "w-16"}`}>
                     <Avatar>
                         <AvatarImage className="rounded-full size-10" src="https://github.com/shadcn.png" alt="@shadcn" />
                         <AvatarFallback className="bg-neutral-300 p-2 rounded-full">UN</AvatarFallback>
                     </Avatar>
                     <div className={`leading-5 ${expanded ? 'block' : 'hidden'}`}>
-                        <p className="font-semibold">Bruno Gonzalez</p>
-                        <p className="text-gray-400">Developer</p>
+                        <p className="font-semibold">{user?.fullname}</p>
+                        <p className="text-gray-400">{user?.role}</p>
                     </div>
                 </div>
+                <Button variant='destructive' onClick={signOut} className="transition-all" size={expanded ? 'default' : 'sm'}>
+                    {
+                        expanded ? "Sign out" : <LogOutIcon size='16px'/>
+                    }
+                </Button>
             </nav>
         </aside>
     )

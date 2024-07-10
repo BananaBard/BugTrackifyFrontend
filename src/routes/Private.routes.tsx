@@ -1,10 +1,21 @@
+import { useAuth } from "@/context/AuthContext"
 import DashboardPage from "@/pages/Private/Dashboard.pages"
 import ProjectPage from "@/pages/Private/Project.pages"
 import ProjectsPage from "@/pages/Private/Projects.pages"
 import StatisticsPage from "@/pages/Private/Statistics.pages"
-import { Route, Routes } from "react-router-dom"
+import { useEffect } from "react"
+import { Route, Routes, useNavigate } from "react-router-dom"
 
 const PrivateRoutes = () => {
+    const {user} = useAuth();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!user) {
+            navigate('/')
+        }
+    },[])
+
     return (
         <Routes>
             <Route path="/" element={<DashboardPage/>}/>

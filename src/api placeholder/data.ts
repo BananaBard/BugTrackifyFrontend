@@ -1,4 +1,4 @@
-import { Incident, Project} from "@/types.d";
+import { Incident, Project, User} from "@/types.d";
 
 
 export const incidentsReports: Incident[] = [
@@ -263,7 +263,23 @@ export const projects: Project[] = [
     title: "Project Phoenix",
     description: "A top-secret project aimed at revolutionizing the industry with cutting-edge technology.",
     leader: "Alice Johnson",
-    team: ["Alice Johnson", "Bob Smith", "Charlie Brown"],
+    team: [
+      {
+        fullname: "Alice Johnson", role: 'Project Leader'
+      },
+      {
+        fullname: "Bob Smith", role: 'Developer'
+      },
+      {
+        fullname: "Charlie Brown", role: 'Tester'
+      },
+      {
+        fullname: "Juan Arias", role: 'Developer'
+      },
+      {
+        fullname: "Roberto Sanchez", role: 'Tester'
+      },
+    ],
     startDate: "2024-01-15",
     status: "In Progress",
     totalIncidents: 54
@@ -273,7 +289,23 @@ export const projects: Project[] = [
     title: "Omega Initiative",
     description: "An initiative to optimize and enhance the performance of our existing systems.",
     leader: "David Green",
-    team: ["David Green", "Eva White", "Frank Black"],
+    team: [
+      {
+        fullname: "David Green", role: 'Project Leader'
+      },
+      {
+        fullname: "Hernesto Backer", role: 'Developer'
+      },
+      {
+        fullname: "Juana Lopez", role: 'Tester'
+      },
+      {
+        fullname: "Mark Paczik", role: 'Developer'
+      },
+      {
+        fullname: "Gerardo Ramirez", role: 'Tester'
+      },
+    ],
     startDate: "2024-03-10",
     status: "In Progress",
     totalIncidents: 20
@@ -283,7 +315,23 @@ export const projects: Project[] = [
     title: "Apollo Program",
     description: "Developing a new mobile application for a global audience with innovative features.",
     leader: "Grace Blue",
-    team: ["Grace Blue", "Harry Red", "Ivy Violet"],
+    team: [
+      {
+        fullname: "Grace Blue", role: 'Project Leader'
+      },
+      {
+        fullname: "Juancho Gonzalez", role: 'Developer'
+      },
+      {
+        fullname: "Jhon Crug", role: 'Tester'
+      },
+      {
+        fullname: "Pedro Lopez", role: 'Developer'
+      },
+      {
+        fullname: "Geremy Island", role: 'Tester'
+      },
+    ],
     startDate: "2024-05-20",
     status: "Planned",
     totalIncidents: 0
@@ -293,7 +341,23 @@ export const projects: Project[] = [
     title: "Vanguard Project",
     description: "A project focused on implementing advanced security measures across our platforms.",
     leader: "Jack Brown",
-    team: ["Jack Brown", "Kate Purple", "Leo Orange"],
+    team: [
+      {
+        fullname: "Jack Brown", role: 'Project Leader'
+      },
+      {
+        fullname: "Hernan Mendez", role: 'Developer'
+      },
+      {
+        fullname: "Walter Gimenez", role: 'Tester'
+      },
+      {
+        fullname: "Jenny Doe", role: 'Developer'
+      },
+      {
+        fullname: "Anna Smith", role: 'Tester'
+      },
+    ],
     startDate: "2024-07-01",
     status: "Not Started",
     totalIncidents: 0

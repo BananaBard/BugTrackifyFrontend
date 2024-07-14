@@ -7,7 +7,7 @@ import SeverityBadgeSelector from "./SeverityBadgeSelector"
 
 const PreviewIncidentCard = ({ incident }: IncidentCardProps) => {
   return (
-    <Card className="w-full max-w-sm">
+    <Card className="w-full flex flex-col">
       <CardHeader>
         <div className="flex flex-col items-start justify-between">
           <div className="space-y-1">
@@ -35,7 +35,7 @@ const PreviewIncidentCard = ({ incident }: IncidentCardProps) => {
           <span className="text-sm">{incident.createdBy}</span>
         </div>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="mt-auto">
         <Button className="w-full" variant='outline'>View Incident</Button>
       </CardFooter>
     </Card>

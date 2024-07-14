@@ -20,26 +20,26 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
     }
 
     return (
-        <Card>
+        <Card className='flex flex-col'>
             <CardHeader>
                 <CardTitle>{project.title}</CardTitle>
                 <CardDescription>{project.description}</CardDescription>
             </CardHeader>
-            <CardContent>
-                <div className="flex items-center justify-between">
+            <CardContent className='flex-1 py-0'>
+                <div className="flex flex-col gap-y-4 items-start xl:gap-y-0 xl:items-center xl:flex-row justify-between">
                     <div className='flex flex-col items-start gap-2'>
                         <p className="font-medium">{project.leader}</p>
                         <p className="text-sm text-muted-foreground">Project Leader</p>
                     </div>
-                    <div className='flex flex-col items-end gap-2'>
+                    <div className='flex flex-col items-start xl:items-end gap-2'>
                         <Badge variant="secondary" className='w-fit'>{project.status}</Badge>
-                        <p className='text-md'><span className='text-sm text-neutral-400'>Start date: </span>{project.startDate}</p>
+                        <p className='text-md lg:text-right'><span className='text-sm text-neutral-400'>Start date: </span>{project.startDate}</p>
                     </div>
                 </div>
             </CardContent>
-            <CardFooter className="flex justify-between items-center">
-                <p>Total incidents: {project.totalIncidents}</p>
-                <Button onClick={() => handleOpenProject()} variant="outline">
+            <CardFooter className="py-4 flex flex-col items-start gap-y-2 justify-between lg:items-center mt-auto">
+                <p className='text-sm lg:text-base'>Total incidents: {project.totalIncidents}</p>
+                <Button className='lg:w-full' onClick={() => handleOpenProject()} variant="outline">
                     View Project
                 </Button>
             </CardFooter>

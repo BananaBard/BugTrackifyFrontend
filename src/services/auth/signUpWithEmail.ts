@@ -22,9 +22,8 @@ const signUpWithEmailService = async({email, password, role, fullname}: SignUpWi
             },
             credentials: 'include'
         })
-        const data = await res.json();
 
-        return data
+        return res
     } catch (error) {
         throw new Error(getErrorMessage(error))
     }

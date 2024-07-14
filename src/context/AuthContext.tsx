@@ -5,13 +5,14 @@ import signUpWithEmailService from "@/services/auth/signUpWithEmail";
 import { User, LoginWithEmailArgs } from "@/types";
 import { PropsWithChildren, createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 interface AuthContext {
     user: User | null;
     token: string | null;
     signOut: () => Promise<void>;
     signUpWithEmail: ({ email, password, fullname, role }: SignUpWithEmail) => Promise<void>;
-    logInWithEmail: ({email, password}: LoginWithEmailArgs) => Promise<void>;
+    logInWithEmail: ({ email, password }: LoginWithEmailArgs) => Promise<void>;
 }
 
 interface SignUpWithEmail {
@@ -26,7 +27,7 @@ const authContext = createContext<AuthContext>({
     token: null,
     signOut: async () => { },
     signUpWithEmail: async () => { },
-    logInWithEmail: async () => {}
+    logInWithEmail: async () => { }
 });
 
 function AuthProvider({ children }: PropsWithChildren) {
@@ -37,12 +38,17 @@ function AuthProvider({ children }: PropsWithChildren) {
     const signOut = async () => {
         try {
             const res = await signOutService();
-            if (res){
+            if (res.ok) {
                 setToken(null);
                 setUser(null);
                 navigate('/');
-            };
-        }catch(error) {
+            } else {
+                toast.error('Something went wrong', {
+                    description: 'Could not sing out, try again',
+                    duration: 3000
+                })
+            }
+        } catch (error) {
             throw new Error(getErrorMessage(error));
         }
     }
@@ -50,22 +56,37 @@ function AuthProvider({ children }: PropsWithChildren) {
     const signUpWithEmail = async ({ email, password, fullname, role }: SignUpWithEmail) => {
         try {
             const res = await signUpWithEmailService({ email, password, fullname, role });
-            setToken(res.token);
-            setUser(res.user[0]);
-            navigate('/dashboard');
-        } catch(error) {
+            const data = await res.json();
+            if (res.ok) {
+                setToken(data.token);
+                setUser(data.user[0]);
+                navigate('/dashboard');
+            } else {
+                toast.error('Something went wrong', {
+                    description: data.message,
+                    duration: 3000
+                })
+            }
+        } catch (error) {
             throw new Error(getErrorMessage(error))
         }
     }
 
-    const logInWithEmail = async({email, password}: LoginWithEmailArgs) => {
+    const logInWithEmail = async ({ email, password }: LoginWithEmailArgs) => {
         try {
-            const res = await loginWithEmailService({email, password});
+            const res = await loginWithEmailService({ email, password });
             const data = await res.json();
-            setToken(data.token);
-            setUser(data.user[0]);
-            navigate('/dashboard');
-        } catch(error) {
+            if (res.ok) {
+                setToken(data.token);
+                setUser(data.user[0]);
+                navigate('/dashboard');
+            } else {
+                toast.error('Something went wrong', {
+                    description: data.message,
+                    duration: 3000
+                })
+            }
+        } catch (error) {
             throw new Error(getErrorMessage(error))
         }
     }

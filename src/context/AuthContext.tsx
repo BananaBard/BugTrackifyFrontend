@@ -3,7 +3,7 @@ import loginWithEmailService from "@/services/auth/logInWithEmail.service";
 import signOutService from "@/services/auth/signOut.service";
 import signUpWithEmailService from "@/services/auth/signUpWithEmail";
 import { User, LoginWithEmailArgs } from "@/types";
-import { PropsWithChildren, createContext, useContext, useState } from "react";
+import { PropsWithChildren, createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
@@ -90,6 +90,28 @@ function AuthProvider({ children }: PropsWithChildren) {
             throw new Error(getErrorMessage(error))
         }
     }
+
+    useEffect(() => {
+        console.log('Use effect form context auth')
+        const checkAuthStatus = async () => {
+            try {
+                const res = await fetch('http://localhost:3000/auth/status', {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    credentials: 'include'
+
+                })
+                const user = await res.json()
+                setUser(user);
+            } catch(error) {
+                throw new Error(getErrorMessage(error))
+            }
+        }
+
+        checkAuthStatus()
+    }, [])
 
     return (
         <authContext.Provider value={{ user, token, signOut, signUpWithEmail, logInWithEmail }}>

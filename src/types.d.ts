@@ -36,7 +36,7 @@ export type Project = {
   title: string;
   description: string;
   leader: string;
-  team: string[];
+  team: Pick<User, 'fullname' | 'role'>[];
   startDate: string;
   status: string;
   totalIncidents: number;

@@ -35,9 +35,9 @@ BugTrackify is a powerful and intuitive bug tracking system designed to help tea
 
 ## Roadmap
 ### Checklist
-- [x] Set up project structure
-- [x] Create dashboard with project overview
-- [ ] Implement user authentication
+- [:white_check_mark:] Set up project structure
+- [:white_check_mark:] Create dashboard with project overview
+- [:white_check_mark:] Implement user authentication
 - [ ] Develop bug reporting feature
 - [ ] Implement project creation
 - [ ] Add user management functionality

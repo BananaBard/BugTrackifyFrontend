@@ -1,7 +1,7 @@
 import getErrorMessage from "@/lib/utils";
 import loginWithEmailService from "@/services/auth/logInWithEmail.service";
 import signOutService from "@/services/auth/signOut.service";
-import signUpWithEmailService from "@/services/auth/signUpWithEmail";
+import signUpWithEmailService from "@/services/auth/signUpWithEmail.service";
 import { User, LoginWithEmailArgs } from "@/types";
 import { PropsWithChildren, createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -34,7 +34,6 @@ function AuthProvider({ children }: PropsWithChildren) {
     const navigate = useNavigate()
     const [user, setUser] = useState<AuthContext['user']>(null);
     const [token, setToken] = useState<AuthContext['token']>(null);
-
     const signOut = async () => {
         try {
             const res = await signOutService();
@@ -103,7 +102,7 @@ function AuthProvider({ children }: PropsWithChildren) {
                     credentials: 'include'
 
                 })
-                const user = await res.json()
+                const {user} = await res.json();
                 setUser(user);
             } catch(error) {
                 throw new Error(getErrorMessage(error))

@@ -3,8 +3,10 @@ import { Button } from "../ui/button";
 import { z } from 'zod';
 import { useForm } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Textarea } from "../ui/textarea";
+import { useAuth } from "@/context/AuthContext";
+import createProjectService from "@/services/projects/createProject.service";
 
 /* id: string;
 title: string;
@@ -21,15 +23,13 @@ const formSchema = z.object({
 });
 
 const CreateProjectForm = () => {
-  //const { logInWithEmail } = useAuth();
-
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     const body = {
       title: values.title,
       description: values.description,
+      leader: user?.id!,
     }
-    console.log(body)
-   // logInWithEmail(body);
+    createProjectService(body);
   }
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -39,8 +39,9 @@ const CreateProjectForm = () => {
     }
   })
 
-  return (
+  const {user} = useAuth();
 
+  return (
     <Form {...form}>
       <form onSubmit={(form.handleSubmit(onSubmit))} className="space-y-4 w-full">
         <FormField
@@ -67,6 +68,7 @@ const CreateProjectForm = () => {
           </FormItem>
         )}>
         </FormField>
+        <FormDescription>After your project is created, you will be able to edit other values, such as the end date, status, and more!</FormDescription>
         <Button type="submit" className="w-full mt-4">Create Project</Button>
       </form>
     </Form>

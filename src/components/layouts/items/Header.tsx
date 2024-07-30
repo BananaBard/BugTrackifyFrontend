@@ -10,7 +10,6 @@ import { useAuth } from "@/context/AuthContext";
 
 const Header = () => {
   const { user, signOut } = useAuth();
-  console.log('is user logged: ', user)
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 py-4 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex justify-between items-center max-w-6xl mx-auto">

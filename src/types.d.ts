@@ -60,3 +60,9 @@ export interface LoginWithEmailArgs {
   email: string;
   password: string;
 }
+
+export interface CreateProjectArgs {
+  title: string;
+  description: string;
+  leader: string;
+}

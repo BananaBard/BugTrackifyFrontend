@@ -25,7 +25,6 @@ const SignUpForm = () => {
   const { signUpWithEmail } = useAuth();
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values)
     const body = {
       email: values.email,
       password: values.password,

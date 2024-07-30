@@ -7,6 +7,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Textarea } from "../ui/textarea";
 import { useAuth } from "@/context/AuthContext";
 import createProjectService from "@/services/projects/createProject.service";
+import { useNavigate } from "react-router-dom";
 
 /* id: string;
 title: string;
@@ -19,17 +20,21 @@ totalIncidents: number; */
 
 const formSchema = z.object({
   title: z.string().min(6, 'Project title should be longer than 6 characters.').max(32, 'Maximum of 32 characters'),
-  description: z.string().min(6, 'Password must be 6 characters long').max(140, 'Can not be longer than 140 characters'),
+  description: z.string().max(140, 'Can not be longer than 140 characters'),
 });
 
 const CreateProjectForm = () => {
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const {user} = useAuth();
+  const navigate = useNavigate();
+
+  const onSubmit = async(values: z.infer<typeof formSchema>) => {
     const body = {
       title: values.title,
       description: values.description,
       leader: user?.id!,
     }
-    createProjectService(body);
+    const project = await createProjectService(body);
+    navigate(`/dashboard/projects/${project.id}`)
   }
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -38,8 +43,6 @@ const CreateProjectForm = () => {
       description: '',
     }
   })
-
-  const {user} = useAuth();
 
   return (
     <Form {...form}>

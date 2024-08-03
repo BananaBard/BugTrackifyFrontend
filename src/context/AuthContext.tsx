@@ -1,4 +1,4 @@
-import getErrorMessage from "@/lib/utils";
+import getErrorMessage, { baseUrl } from "@/lib/utils";
 import loginWithEmailService from "@/services/auth/logInWithEmail.service";
 import signOutService from "@/services/auth/signOut.service";
 import signUpWithEmailService from "@/services/auth/signUpWithEmail.service";
@@ -94,7 +94,7 @@ function AuthProvider({ children }: PropsWithChildren) {
         console.log('Use effect form context auth')
         const checkAuthStatus = async () => {
             try {
-                const res = await fetch('http://localhost:3000/auth/status', {
+                const res = await fetch(`${baseUrl}auth/status`, {
                     method: 'POST',
                     headers: {
                         "Content-Type": "application/json"
@@ -102,8 +102,12 @@ function AuthProvider({ children }: PropsWithChildren) {
                     credentials: 'include'
 
                 })
-                const {user} = await res.json();
-                setUser(user);
+                if (res.ok) {
+                    const {user} = await res.json();
+                    setUser(user);
+                } else {
+                    setUser(null);
+                }
             } catch(error) {
                 throw new Error(getErrorMessage(error))
             }

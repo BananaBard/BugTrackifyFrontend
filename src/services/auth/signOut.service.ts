@@ -1,8 +1,8 @@
-import getErrorMessage from "@/lib/utils";
+import getErrorMessage, { baseUrl } from "@/lib/utils";
 
 const signOutService = async () => {
     try {
-        const res = await fetch('http://localhost:3000/auth/signout', {
+        const res = await fetch(`${baseUrl}auth/signout`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json"

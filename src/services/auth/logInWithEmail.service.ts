@@ -1,10 +1,10 @@
-import getErrorMessage from "@/lib/utils";
+import getErrorMessage, { baseUrl } from "@/lib/utils";
 import { LoginWithEmailArgs } from "@/types";
 
 
 const loginWithEmailService = async ({ email, password }: LoginWithEmailArgs) => {
     try {
-        const res = await fetch('http://localhost:3000/auth/login', {
+        const res = await fetch(`${baseUrl}auth/login`, {
             method: 'POST',
             body: JSON.stringify({
                 email: email,

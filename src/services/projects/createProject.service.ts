@@ -1,10 +1,10 @@
-import getErrorMessage from "@/lib/utils"
+import getErrorMessage, { baseUrl } from "@/lib/utils"
 import { CreateProjectArgs } from "@/types"
 import { toast } from "sonner";
 
 const createProjectService = async({title, description, leader}: CreateProjectArgs) => {
     try {
-        const res = await fetch('http://localhost:3000/projects/new', {
+        const res = await fetch(`${baseUrl}projects/new`, {
             method: 'POST',
             body: JSON.stringify({
                 title: title,

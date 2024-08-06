@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom"
 import Sidebar from "../Sidebars/Sidebar"
 import SidebarProvider from "@/context/SidebarContext"
 import DashboardBreadcrum from "../DashboardBreadcrum"
-import useHistory from "@/hooks/onUseHistory"
+import useHistory from "@/hooks/useHistory"
 
 const DashboardLayout = () => {
     const history = useHistory();

@@ -288,7 +288,7 @@ export const projects: Project[] = [
     id: "p002",
     title: "Omega Initiative",
     description: "An initiative to optimize and enhance the performance of our existing systems.",
-    leader: "David Green",
+    leader: {fullname: "David Green"},
     team: [
       {
         fullname: "David Green", role: 'Project Leader'
@@ -308,13 +308,13 @@ export const projects: Project[] = [
     ],
     startDate: "2024-03-10",
     status: "In Progress",
-    totalIncidents: 20
+    incidentCount: 20
   },
   {
     id: "p003",
     title: "Apollo Program",
     description: "Developing a new mobile application for a global audience with innovative features.",
-    leader: "Grace Blue",
+    leader: {fullname: "Grace Blue"},
     team: [
       {
         fullname: "Grace Blue", role: 'Project Leader'
@@ -334,13 +334,13 @@ export const projects: Project[] = [
     ],
     startDate: "2024-05-20",
     status: "Planned",
-    totalIncidents: 0
+    incidentCount: 0
   },
   {
     id: "p004",
     title: "Vanguard Project",
     description: "A project focused on implementing advanced security measures across our platforms.",
-    leader: "Jack Brown",
+    leader: {fullname: "Jack Brown"},
     team: [
       {
         fullname: "Jack Brown", role: 'Project Leader'
@@ -360,6 +360,6 @@ export const projects: Project[] = [
     ],
     startDate: "2024-07-01",
     status: "Not Started",
-    totalIncidents: 0
+    incidentCount: 0
   }
 ];

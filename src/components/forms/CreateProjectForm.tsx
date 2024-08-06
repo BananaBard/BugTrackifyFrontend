@@ -18,6 +18,7 @@ startDate: string;
 status: string;
 totalIncidents: number; */
 
+
 const formSchema = z.object({
   title: z.string().min(6, 'Project title should be longer than 6 characters.').max(32, 'Maximum of 32 characters'),
   description: z.string().max(140, 'Can not be longer than 140 characters'),
@@ -32,6 +33,7 @@ const CreateProjectForm = () => {
       title: values.title,
       description: values.description,
       leader: user?.id!,
+      status: 'Planned'
     }
     const project = await createProjectService(body);
     navigate(`/dashboard/projects/${project.id}`)

@@ -2,14 +2,15 @@ import getErrorMessage, { baseUrl } from "@/lib/utils"
 import { CreateProjectArgs } from "@/types"
 import { toast } from "sonner";
 
-const createProjectService = async({title, description, leader}: CreateProjectArgs) => {
+const createProjectService = async({title, description, leader, status}: CreateProjectArgs) => {
     try {
         const res = await fetch(`${baseUrl}projects/new`, {
             method: 'POST',
             body: JSON.stringify({
                 title: title,
                 description: description,
-                leader: leader
+                leader: leader,
+                status: status
             }),
             headers: {
                 "Content-Type": "application/json"
@@ -25,14 +26,12 @@ const createProjectService = async({title, description, leader}: CreateProjectAr
         } else {
             const data = await res.json();
             toast.success('Project created', {
-                description: 'You will be redirected to your project',
                 duration: 3000
             })
             const project = data.project[0]
             return project;
         }
     } catch(error) {
-        console.error(getErrorMessage(error))
         throw new Error(getErrorMessage(error))
     }
 }

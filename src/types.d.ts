@@ -35,11 +35,11 @@ export type Project = {
   id: string;
   title: string;
   description: string;
-  leader: string;
+  leader: {fullname: string};
   team: Pick<User, 'fullname' | 'role'>[];
   startDate: string;
   status: string;
-  totalIncidents: number;
+  incidentCount: number;
 }
 
 export type User = {
@@ -65,4 +65,5 @@ export interface CreateProjectArgs {
   title: string;
   description: string;
   leader: string;
+  status: string;
 }

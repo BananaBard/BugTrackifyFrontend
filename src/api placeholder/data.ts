@@ -262,7 +262,7 @@ export const projects: Project[] = [
     id: "p001",
     title: "Project Phoenix",
     description: "A top-secret project aimed at revolutionizing the industry with cutting-edge technology.",
-    leader: "Alice Johnson",
+    leader: {fullname: "Alice Johnson"},
     team: [
       {
         fullname: "Alice Johnson", role: 'Project Leader'
@@ -282,7 +282,7 @@ export const projects: Project[] = [
     ],
     startDate: "2024-01-15",
     status: "In Progress",
-    totalIncidents: 54
+    incidentCount: 54
   },
   {
     id: "p002",

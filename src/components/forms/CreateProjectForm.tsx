@@ -8,6 +8,9 @@ import { Textarea } from "../ui/textarea";
 import { useAuth } from "@/context/AuthContext";
 import createProjectService from "@/services/projects/createProject.service";
 import { useNavigate } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { queryKeys } from "@/lib/utils";
+import { toast } from "sonner";
 
 /* id: string;
 title: string;
@@ -24,10 +27,26 @@ const formSchema = z.object({
   description: z.string().max(140, 'Can not be longer than 140 characters'),
 });
 
+
+
 const CreateProjectForm = () => {
   const {user} = useAuth();
   const navigate = useNavigate();
-
+  const queryClient = useQueryClient();
+  
+  const createProjectMutation = useMutation({
+    mutationFn: createProjectService,
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({queryKey: queryKeys.projects.base})
+      navigate(`/dashboard/projects/${data?.id}`)
+    },
+    onError: () => {
+      toast.error('Something went wrong', {
+        description: 'Could not create new project'
+      })
+    }
+  })
+  
   const onSubmit = async(values: z.infer<typeof formSchema>) => {
     const body = {
       title: values.title,
@@ -35,8 +54,7 @@ const CreateProjectForm = () => {
       leader: user?.id!,
       status: 'Planned'
     }
-    const project = await createProjectService(body);
-    navigate(`/dashboard/projects/${project.id}`)
+    createProjectMutation.mutate(body)
   }
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -74,7 +92,7 @@ const CreateProjectForm = () => {
         )}>
         </FormField>
         <FormDescription>After your project is created, you will be able to edit other values, such as the end date, status, and more!</FormDescription>
-        <Button type="submit" className="w-full mt-4">Create Project</Button>
+        <Button type="submit" className="w-full mt-4" disabled={createProjectMutation.isPending}>Create Project</Button>
       </form>
     </Form>
   )

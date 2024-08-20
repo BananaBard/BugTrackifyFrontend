@@ -33,12 +33,12 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
                     </div>
                     <div className='flex flex-col items-start xl:items-end gap-2'>
                         <Badge variant="secondary" className='w-fit'>{project.status}</Badge>
-                        {project.startDate && <p className='text-md lg:text-right'><span className='text-sm text-neutral-400'>Start date: </span>{project.startDate}</p>}
+                        {project.start_date && <p className='text-md lg:text-right'><span className='text-sm text-neutral-400'>Start date: </span>{project.start_date}</p>}
                     </div>
                 </div>
             </CardContent>
             <CardFooter className="py-4 flex flex-col items-start gap-y-2 justify-between lg:items-center mt-auto">
-                <p className='text-sm lg:text-base'>Total incidents: {project.incidentCount}</p>
+                <p className='text-sm lg:text-base'>Total incidents: {project.incident_count}</p>
                 <Button className='lg:w-full' onClick={() => handleOpenProject()} variant="outline">
                     View Project
                 </Button>

@@ -32,7 +32,6 @@ const ProjectPage = () => {
     const {data: projects} = useProjects();
     const data = useMemo(() => projects?.find(p => p.id == projectId),[projects, projectId])
     const {data: bugs, error, isLoading} = useProjectIncidents(projectId!)
-    console.log(bugs)
 
     const testers =  team.filter(member => member.role === 'Tester') /* data?.team ? data.team.filter(member => member.role === 'Tester') : null; */
     const developers = team.filter(member => member.role === 'Developer') /* data?.team ? data.team.filter(member => member.role === 'Developer') : null; */

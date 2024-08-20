@@ -21,6 +21,14 @@ function parseTimestamp(timestamp: string) {
 	return `${formattedDate} / ${formattedTime}`;
 }
 
-export {baseUrl, parseTimestamp}
+const queryKeys = {
+	projects: {
+        base: ['projects'],
+        incidentsById: (projectId: string) => [...queryKeys.projects.base, 'incidents', projectId],
+        comments: (projectId: string) => [...queryKeys.projects.base, 'comments', projectId]
+    }
+}
+
+export {baseUrl, queryKeys, parseTimestamp}
 
 export default getErrorMessage

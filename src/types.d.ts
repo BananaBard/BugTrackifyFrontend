@@ -8,16 +8,22 @@ export type Incident = {
   id: string;
   title: string;
   project: string;
-  creationDate: string;
-  assignedTo: string;
-  createdBy: string;
+  created_at: string;
+  assigned_to: {
+    id: string,
+    fullname: string
+  };
+  created_by: {
+    id: string,
+    fullname: string
+  };
   status: Status;
   priority: Priority;
   severity: Severity;
   description: string;
-  stepsToReproduce: string[];
-  actualResult: string;
-  expectedResult: string;
+  steps_to_reproduce: string[];
+  actual_result: string;
+  expected_result: string;
   comments: UserComment[];
 };
 
@@ -37,9 +43,9 @@ export type Project = {
   description: string;
   leader: {fullname: string};
   team: Pick<User, 'fullname' | 'role'>[];
-  startDate: string;
+  start_date: string;
   status: string;
-  incidentCount: number;
+  incident_count: number;
 }
 
 export type User = {

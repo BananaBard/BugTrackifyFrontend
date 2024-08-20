@@ -1,5 +1,5 @@
 import getErrorMessage, { baseUrl } from "@/lib/utils"
-import { CreateProjectArgs } from "@/types"
+import { CreateProjectArgs, Project } from "@/types"
 import { toast } from "sonner";
 
 const createProjectService = async({title, description, leader, status}: CreateProjectArgs) => {
@@ -29,7 +29,7 @@ const createProjectService = async({title, description, leader, status}: CreateP
                 duration: 3000
             })
             const project = data.project[0]
-            return project;
+            return project as Project;
         }
     } catch(error) {
         throw new Error(getErrorMessage(error))

@@ -5,8 +5,16 @@ import StatusBadgeSelector from "./StatusBadgeSelector"
 import PriorityBadgeSelector from "./PriorityBadgeSelector"
 import SeverityBadgeSelector from "./SeverityBadgeSelector"
 import { parseTimestamp } from "@/lib/utils"
+import { useNavigate, useParams } from "react-router-dom"
 
 const PreviewIncidentCard = ({ incident }: IncidentCardProps) => {
+  const navigate = useNavigate();
+  const params = useParams();
+  const handleOpenIncident = () => {
+    if (incident.id) {
+        navigate(`/dashboard/projects/${params.projectId}/${incident.id}`)
+    }
+  }
   return (
     <Card className="w-full flex flex-col">
       <CardHeader>
@@ -38,7 +46,7 @@ const PreviewIncidentCard = ({ incident }: IncidentCardProps) => {
         </div>
       </CardContent>
       <CardFooter className="mt-auto">
-        <Button className="w-full" variant='outline'>View Incident</Button>
+        <Button className="w-full" variant='outline' onClick={() => handleOpenIncident()}>View Incident</Button>
       </CardFooter>
     </Card>
   )

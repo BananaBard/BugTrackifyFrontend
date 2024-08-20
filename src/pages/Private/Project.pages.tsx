@@ -2,8 +2,11 @@ import { incidentsReports as bugs } from "@/api placeholder/data"
 import PreviewIncidentListing from "@/components/listings/PreviewIncidentListing"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { useProjectIncidents } from "@/hooks/useProjectIncidents"
 import useProjects from "@/hooks/useProjects"
+import { QueryKey, useMutation, useQueryClient } from "@tanstack/react-query"
 import { PlusIcon } from "lucide-react"
+import { useMemo, useState } from "react"
 import { useParams } from "react-router-dom"
 
 const team = [
@@ -27,10 +30,13 @@ const team = [
 const ProjectPage = () => {
     const {projectId} = useParams();
     const {data: projects} = useProjects();
-    const data = projects?.find(p => p.id == projectId)
+    const data = useMemo(() => projects?.find(p => p.id == projectId),[projects, projectId])
+    const {data: bugs, error, isLoading} = useProjectIncidents(projectId!)
+    console.log(bugs)
 
     const testers =  team.filter(member => member.role === 'Tester') /* data?.team ? data.team.filter(member => member.role === 'Tester') : null; */
     const developers = team.filter(member => member.role === 'Developer') /* data?.team ? data.team.filter(member => member.role === 'Developer') : null; */
+
     return (
             data && (
                 <>
@@ -82,6 +88,14 @@ const ProjectPage = () => {
                 </div>
                 <div className="w-full md:w-3/4 lg:w-5/6 ">
                     {
+                        isLoading && <h2>Loading</h2>
+                    }
+
+                    {
+                        error && <h2>{error.message}</h2>
+                    }
+
+                    {
                         bugs ? (
                             <PreviewIncidentListing incidents={bugs} />
                         ) : (
@@ -96,3 +110,27 @@ const ProjectPage = () => {
 }
 
 export default ProjectPage
+
+const MyForm = () => {
+    const queryClient = useQueryClient();
+    const paramId = 'b166418f-42fa-4594-8d14-2bab8cfce25f'
+    useProjectIncidents(paramId);
+    useProjectIncidents('5a2de5b4-b6d0-4e73-8acb-3453132bc5e5');
+
+    const createIncidentMutation = useMutation({
+        mutationFn: async () => ({ updatedProjectId: paramId }),
+
+        onSuccess: ({updatedProjectId}) => {
+            queryClient.invalidateQueries({queryKey: queryKeys.projects.incidentsById(updatedProjectId) })
+        }
+    });
+
+}
+
+const queryKeys = {
+    projects: {
+        base: ['projects'],
+        incidentsById: (projectId: string) => [...queryKeys.projects.base, 'incidents', projectId],
+        comments: (projectId: string) => [...queryKeys.projects.base, 'comments', projectId]
+    }
+}

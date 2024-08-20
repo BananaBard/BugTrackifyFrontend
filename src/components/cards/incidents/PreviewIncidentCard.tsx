@@ -4,6 +4,7 @@ import { IncidentCardProps } from "@/types"
 import StatusBadgeSelector from "./StatusBadgeSelector"
 import PriorityBadgeSelector from "./PriorityBadgeSelector"
 import SeverityBadgeSelector from "./SeverityBadgeSelector"
+import { parseTimestamp } from "@/lib/utils"
 
 const PreviewIncidentCard = ({ incident }: IncidentCardProps) => {
   return (
@@ -25,7 +26,7 @@ const PreviewIncidentCard = ({ incident }: IncidentCardProps) => {
       <CardContent className="grid gap-2">
         <div className="flex items-center justify-between">
           <span className="text-sm text-muted-foreground">Created at</span>
-          <span className="text-sm">{incident.created_at}</span>
+          <span className="text-sm">{parseTimestamp(incident.created_at)}</span>
         </div>
         <div className="flex items-center justify-between">
           <span className="text-sm text-muted-foreground">Assigned To</span>

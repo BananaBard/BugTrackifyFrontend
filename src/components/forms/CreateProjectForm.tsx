@@ -12,15 +12,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "@/lib/utils";
 import { toast } from "sonner";
 
-/* id: string;
-title: string;
-description: string;
-leader: string;
-team: Pick<User, 'fullname' | 'role'>[];
-startDate: string;
-status: string;
-totalIncidents: number; */
-
 
 const formSchema = z.object({
   title: z.string().min(6, 'Project title should be longer than 6 characters.').max(32, 'Maximum of 32 characters'),

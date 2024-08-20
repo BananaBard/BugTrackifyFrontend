@@ -1,12 +1,10 @@
-import { incidentsReports as bugs } from "@/api placeholder/data"
 import PreviewIncidentListing from "@/components/listings/PreviewIncidentListing"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useProjectIncidents } from "@/hooks/useProjectIncidents"
 import useProjects from "@/hooks/useProjects"
-import { QueryKey, useMutation, useQueryClient } from "@tanstack/react-query"
 import { PlusIcon } from "lucide-react"
-import { useMemo, useState } from "react"
+import { useMemo } from "react"
 import { useParams } from "react-router-dom"
 
 const team = [

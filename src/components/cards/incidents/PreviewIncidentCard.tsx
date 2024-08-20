@@ -4,14 +4,16 @@ import { IncidentCardProps } from "@/types"
 import StatusBadgeSelector from "./StatusBadgeSelector"
 import PriorityBadgeSelector from "./PriorityBadgeSelector"
 import SeverityBadgeSelector from "./SeverityBadgeSelector"
+import { parseTimestamp } from "@/lib/utils"
 
 const PreviewIncidentCard = ({ incident }: IncidentCardProps) => {
   return (
     <Card className="w-full flex flex-col">
       <CardHeader>
         <div className="flex flex-col items-start justify-between">
-          <div className="space-y-1">
-            <CardTitle className="text-lg">#{incident.id}</CardTitle>
+          <div>
+            <span className="text-sm text-neutral-300">{incident.id}</span>
+            <CardTitle className="text-md font-semibold">{incident.title}</CardTitle>
           </div>
           <div className="flex items-center gap-2 mt-2">
             <StatusBadgeSelector status={incident.status}/>
@@ -23,16 +25,16 @@ const PreviewIncidentCard = ({ incident }: IncidentCardProps) => {
       </CardHeader>
       <CardContent className="grid gap-2">
         <div className="flex items-center justify-between">
-          <span className="text-sm text-muted-foreground">Created</span>
-          <span className="text-sm">{incident.creationDate}</span>
+          <span className="text-sm text-muted-foreground">Created at</span>
+          <span className="text-sm">{parseTimestamp(incident.created_at)}</span>
         </div>
         <div className="flex items-center justify-between">
           <span className="text-sm text-muted-foreground">Assigned To</span>
-          <span className="text-sm">{incident.assignedTo}</span>
+          <span className="text-sm">{incident.assigned_to ? incident.assigned_to.fullname : 'Not assigned' }</span>
         </div>
         <div className="flex items-center justify-between">
           <span className="text-sm text-muted-foreground">Creator</span>
-          <span className="text-sm">{incident.createdBy}</span>
+          <span className="text-sm">{incident.created_by.fullname}</span>
         </div>
       </CardContent>
       <CardFooter className="mt-auto">

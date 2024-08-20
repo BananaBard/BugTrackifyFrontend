@@ -1,11 +1,11 @@
-import { projects } from '../../api placeholder/data';
 import { Input } from '@/components/ui/input';
 import ProjectCard from '@/components/cards/ProjectCard';
 import NewProjectDialog from '@/components/modals/NewProject';
+import useProjects from '@/hooks/useProjects';
 
 
 const ProjectsPage = () => {
-
+    const { data: projects, error, isPending } = useProjects();
     return (
         <>
             <header className='flex flex-col sm:flex-row items-start gap-y-2 sm:justify-between sm:items-center mb-4'>
@@ -19,14 +19,25 @@ const ProjectsPage = () => {
                             className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
                         />
                     </div>
-                    <NewProjectDialog/>
+                    <NewProjectDialog />
                 </div>
             </header>
-            <ul className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+            <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
                 {
-                    projects.map(p => (
-                        <ProjectCard key={p.id} project={p} />
-                    ))
+                    isPending && <span>Loading</span>
+                }
+                {
+                    error && <span>{error.message}</span>
+                }
+                {
+                    projects && projects.length > 0 ? (
+                        projects.map(p => (
+                            <ProjectCard key={p.id} project={p} />
+                        ))
+
+                    ) : (
+                        <h2>You don't have any projects yet...</h2>
+                    )
                 }
             </ul>
         </>

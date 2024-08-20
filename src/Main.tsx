@@ -8,7 +8,13 @@ import { Toaster } from 'sonner';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
 
-const queryClient = new QueryClient();
+const STALE_TIME = 1 * 60 * 1000;
+
+const queryClient = new QueryClient({defaultOptions: {
+  queries: {
+    staleTime: STALE_TIME
+  }
+}});
 
 const root = createRoot(document.getElementById("app")!);
 root.render(

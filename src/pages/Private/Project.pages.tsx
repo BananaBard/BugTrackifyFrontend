@@ -110,7 +110,7 @@ const ProjectPage = () => {
 
 export default ProjectPage
 
-const MyForm = () => {
+/* const MyForm = () => {
     const queryClient = useQueryClient();
     const paramId = 'b166418f-42fa-4594-8d14-2bab8cfce25f'
     useProjectIncidents(paramId);
@@ -124,12 +124,4 @@ const MyForm = () => {
         }
     });
 
-}
-
-const queryKeys = {
-    projects: {
-        base: ['projects'],
-        incidentsById: (projectId: string) => [...queryKeys.projects.base, 'incidents', projectId],
-        comments: (projectId: string) => [...queryKeys.projects.base, 'comments', projectId]
-    }
-}
+} */

@@ -1,6 +1,6 @@
 import { useMediaQuery } from 'usehooks-ts'
 import { DesktopSidebar } from './DesktopSidebar';
-import { BarChart, Bug, Folder, LayoutDashboardIcon, Settings } from 'lucide-react';
+import { BarChart, Bug, Folder, HomeIcon, LayoutDashboardIcon, Settings } from 'lucide-react';
 import MobileSidebar from './MobileSidebar';
 import { SidebarItem } from './SidebarItem';
 
@@ -9,6 +9,7 @@ const Sidebar = () => {
 
     if (isDesktop) return (
         <DesktopSidebar>
+            <SidebarItem text='Home' icon={<HomeIcon size={20} />} path="/" />
             <SidebarItem text='Dashboard' icon={<LayoutDashboardIcon size={20} />} path="dashboard" />
             <SidebarItem text='Statistics' icon={<BarChart size={20} />} path="dashboard/statistics" />
             <SidebarItem text='Projects' icon={<Folder size={20} />} path="dashboard/projects" />
@@ -18,7 +19,8 @@ const Sidebar = () => {
     )
 
     return <MobileSidebar>
-        <SidebarItem text='Dashboard' icon={<LayoutDashboardIcon size={20} />} path="dashboard" />
+            <SidebarItem text='Home' icon={<HomeIcon size={20} />} path="/" />
+            <SidebarItem text='Dashboard' icon={<LayoutDashboardIcon size={20} />} path="dashboard" />
             <SidebarItem text='Statistics' icon={<BarChart size={20} />} path="dashboard/statistics" />
             <SidebarItem text='Projects' icon={<Folder size={20} />} path="dashboard/projects" />
             <SidebarItem text='Incidents' icon={<Bug size={20} />} alert path="dashboard/incidents" />

@@ -83,7 +83,7 @@ const ProjectPage = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-full md:w-3/4 lg:w-5/6 ">
+                <div className="w-full md:w-3/4 lg:w-5/6 mb-4">
                     {
                         isLoading && <h2>Loading</h2>
                     }

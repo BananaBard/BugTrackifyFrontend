@@ -20,7 +20,7 @@ const PreviewIncidentCard = ({ incident }: IncidentCardProps) => {
       <CardHeader>
         <div className="flex flex-col items-start justify-between">
           <div>
-            <span className="text-sm text-neutral-300">{incident.id}</span>
+            <span className="text-sm dark:text-neutral-300">{incident.id}</span>
             <CardTitle className="text-md font-semibold">{incident.title}</CardTitle>
           </div>
           <div className="flex items-center gap-2 mt-2">

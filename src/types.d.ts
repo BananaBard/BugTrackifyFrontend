@@ -17,6 +17,7 @@ export type Incident = {
     id: string,
     fullname: string
   };
+  updated_at: string;
   status: Status;
   priority: Priority;
   severity: Severity;

@@ -19,7 +19,7 @@ const PrivateRoutes = () => {
 
     return (
         <Routes>
-            <Route path="/" element={<DashboardPage/>}/>
+            <Route path="/dashboard" element={<DashboardPage/>}/>
             <Route path="/statistics" element={<StatisticsPage/>}/>
             <Route path="/projects" element={<ProjectsPage/>}/>
             <Route path="/projects/:projectId" element={<ProjectPage/>}/>

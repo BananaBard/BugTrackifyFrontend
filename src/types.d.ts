@@ -25,7 +25,7 @@ export type Incident = {
   steps_to_reproduce: string[];
   actual_result: string;
   expected_result: string;
-  comments: UserComment[];
+  comments?: UserComment[];
 };
 
 export type UserComment = {

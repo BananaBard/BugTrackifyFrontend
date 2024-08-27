@@ -1,6 +1,7 @@
 import {
     Dialog,
     DialogContent,
+    DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -19,10 +20,13 @@ const NewIncidentModal = () => {
                 </Button>
             </DialogTrigger>
             <DialogContent className="max-h-[768px] overflow-scroll">
-                <DialogTitle>Add a new incident!</DialogTitle>
                 <DialogHeader>
-                    <CreateIncidentForm/>
+                    <DialogTitle>Create Incident Ticket</DialogTitle>
                 </DialogHeader>
+                <DialogDescription>
+                    This will add a new incident ticket in this project.
+                </DialogDescription>
+                    <CreateIncidentForm/>
             </DialogContent>
         </Dialog>
     )

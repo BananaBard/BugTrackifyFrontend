@@ -1,6 +1,7 @@
 import {
     Dialog,
     DialogContent,
+    DialogDescription,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -19,10 +20,13 @@ const NewProjectDialog = () => {
                 </Button>
             </DialogTrigger>
             <DialogContent>
-                <DialogTitle>Create a new project!</DialogTitle>
                 <DialogHeader>
-                    <CreateProjectForm/>
+                    <DialogTitle>Create New Project</DialogTitle>
                 </DialogHeader>
+                <DialogDescription>
+                    This will create an empty project!
+                </DialogDescription>
+                    <CreateProjectForm/>
             </DialogContent>
         </Dialog>
     )

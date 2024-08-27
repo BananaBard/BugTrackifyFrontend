@@ -16,7 +16,6 @@ const IncidentPage = () => {
     const navigate = useNavigate();
     const {projectId, incidentId} = useParams()
     const {data, isLoading, isError} = useProjectIncidents(projectId!)
-    console.log(data)
     
     if (isLoading) return <h3>Loading</h3>
     if (isError) return <h3>Something went wrong</h3>
@@ -74,11 +73,11 @@ const IncidentPage = () => {
                     <div>
                         <h3 className="text-xl font-semibold mb-2">Steps to reproduce</h3>
                         <ol className="list-decimal px-6">
-                            {
+                            {/* {
                                 incident.steps_to_reproduce.map((step, index) => (
                                     <li key={index}>{step}</li>
                                 ))
-                            }
+                            } */}
                         </ol>
                     </div>
                     <div>

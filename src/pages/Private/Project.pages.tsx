@@ -89,10 +89,10 @@ const ProjectPage = () => {
                     }
 
                     {
-                        bugs ? (
+                        bugs && bugs.length > 0 ? (
                             <PreviewIncidentListing incidents={bugs} />
                         ) : (
-                            <h2>This project does not have any incidents yet.</h2>
+                            <h2 className="text-xl pt-6">This project does not have any incidents yet.</h2>
                         )
                     }
                 </div>

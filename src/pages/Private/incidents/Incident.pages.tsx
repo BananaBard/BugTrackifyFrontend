@@ -10,6 +10,7 @@ import { ArrowLeft } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useProjectIncidents } from "@/hooks/useProjectIncidents";
 import { parseTimestamp } from "@/lib/utils";
+import DeleteIncidentModal from "@/components/modals/DeleteIncident.modal";
 
 const IncidentPage = () => {
     const {user} = useAuth();
@@ -48,7 +49,7 @@ const IncidentPage = () => {
                     </div>  
                     <CardDescription>{incident.description}</CardDescription>
                 </CardHeader>
-                <CardContent className="flex flex-col md:flex-row gap-y-4 w-full justify-between items-center">
+                <CardContent className="flex flex-col md:flex-row gap-y-4 w-full justify-between md:items-center">
                     <div className="flex flex-col items-baseline gap-y-1">
                         <p>Created <span className="font-semibold">{parseTimestamp(incident.created_at)}</span></p>
                         {incident.updated_at ? <p>Updated <span className="font-semibold">{parseTimestamp(incident.updated_at)}</span></p> : ''}
@@ -60,7 +61,7 @@ const IncidentPage = () => {
                         (user && (user?.id == incident.created_by.id)) && 
                         <CardFooter className="flex md:flex-col items-center gap-4 p-0">
                             <Button variant='outline' className="w-full">Edit</Button>
-                            <Button variant='destructive' className="w-full">Delete</Button>
+                            <DeleteIncidentModal/>
                         </CardFooter>
                     }
                     </div>

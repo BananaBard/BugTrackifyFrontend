@@ -7,7 +7,7 @@ type Severity = "minor" | "major" | "critical" | "blocker"
 export type Incident = {
   id: string;
   title: string;
-  project: string;
+  project_id: string;
   created_at: string;
   assigned_to: {
     id: string,
@@ -17,14 +17,15 @@ export type Incident = {
     id: string,
     fullname: string
   };
+  updated_at: string;
   status: Status;
   priority: Priority;
   severity: Severity;
   description: string;
-  steps_to_reproduce: string[];
+  steps_to_reproduce: string;
   actual_result: string;
   expected_result: string;
-  comments: UserComment[];
+  comments?: UserComment[];
 };
 
 export type UserComment = {

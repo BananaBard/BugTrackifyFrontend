@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/context/AuthContext";
 import { Link } from "react-router-dom";
 
 const LandingPage = () => {
+  const {user} = useAuth();
   return (
     <main className="max-w-6xl mx-auto py-10">
       <div className="flex">
@@ -14,13 +16,23 @@ const LandingPage = () => {
             Simplify your project management and ensure smooth workflows with
             our intuitive bug tracking system.
           </p>
-          <div className="pt-12 flex gap-x-6 items-center">
-            <Button asChild size="lg" variant="shine">
-              <Link to='/signup'>Get Started</Link>
-            </Button>
-            <Button size="lg" variant="secondary">
-              Try Demo
-            </Button>
+          <div className="pt-8 flex gap-x-6 items-center">
+            {
+              user != null ? (
+                <Button asChild size='lg' variant='shine'>
+                  <Link to='/dashboard'>Go to Dashboard</Link>
+                </Button>
+              ) : (
+                <>
+                  <Button asChild size="lg" variant="shine">
+                    <Link to='/signup'>Get Started</Link>
+                  </Button>
+                  <Button size="lg" variant="secondary">
+                    Try Demo
+                  </Button>
+                </>
+              )
+            }
           </div>
         </div>
         <div className="w-1/2 flex items-center justify-center">

@@ -1,9 +1,8 @@
 import PreviewIncidentListing from "@/components/listings/PreviewIncidentListing"
-import { Button } from "@/components/ui/button"
+import NewIncidentModal from "@/components/modals/NewIncident.modal"
 import { Input } from "@/components/ui/input"
 import { useProjectIncidents } from "@/hooks/useProjectIncidents"
 import useProjects from "@/hooks/useProjects"
-import { PlusIcon } from "lucide-react"
 import { useMemo } from "react"
 import { useParams } from "react-router-dom"
 
@@ -48,10 +47,7 @@ const ProjectPage = () => {
                             className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
                         />
                     </div>
-                    <Button variant='default' className='sm:ml-4 min-[480px]:w-1/4 md:w-auto'>
-                        <PlusIcon className="h-4 w-4 mr-2" />
-                        New Incident
-                    </Button>
+                    <NewIncidentModal/>
                 </div>
             </header>
             <div className="flex flex-col md:flex-row gap-4">
@@ -83,7 +79,7 @@ const ProjectPage = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-full md:w-3/4 lg:w-5/6 ">
+                <div className="w-full md:w-3/4 lg:w-5/6 mb-4">
                     {
                         isLoading && <h2>Loading</h2>
                     }
@@ -93,10 +89,10 @@ const ProjectPage = () => {
                     }
 
                     {
-                        bugs ? (
+                        bugs && bugs.length > 0 ? (
                             <PreviewIncidentListing incidents={bugs} />
                         ) : (
-                            <h2>This project does not have any incidents yet.</h2>
+                            <h2 className="text-xl pt-6">This project does not have any incidents yet.</h2>
                         )
                     }
                 </div>
@@ -107,19 +103,3 @@ const ProjectPage = () => {
 }
 
 export default ProjectPage
-
-/* const MyForm = () => {
-    const queryClient = useQueryClient();
-    const paramId = 'b166418f-42fa-4594-8d14-2bab8cfce25f'
-    useProjectIncidents(paramId);
-    useProjectIncidents('5a2de5b4-b6d0-4e73-8acb-3453132bc5e5');
-
-    const createIncidentMutation = useMutation({
-        mutationFn: async () => ({ updatedProjectId: paramId }),
-
-        onSuccess: ({updatedProjectId}) => {
-            queryClient.invalidateQueries({queryKey: queryKeys.projects.incidentsById(updatedProjectId) })
-        }
-    });
-
-} */

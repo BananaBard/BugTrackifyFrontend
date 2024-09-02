@@ -11,6 +11,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useProjectIncidents } from "@/hooks/useProjectIncidents";
 import { parseTimestamp } from "@/lib/utils";
 import DeleteIncidentModal from "@/components/modals/DeleteIncident.modal";
+import UpdateIncidentModal from "@/components/modals/updateIncident.modal";
 
 const IncidentPage = () => {
     const {user} = useAuth();
@@ -60,7 +61,7 @@ const IncidentPage = () => {
                     {
                         (user && (user?.id == incident.created_by.id)) && 
                         <CardFooter className="flex md:flex-col items-center gap-4 p-0">
-                            <Button variant='outline' className="w-full">Edit</Button>
+                            <UpdateIncidentModal/>
                             <DeleteIncidentModal/>
                         </CardFooter>
                     }

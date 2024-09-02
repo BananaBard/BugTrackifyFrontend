@@ -29,7 +29,7 @@ const PreviewIncidentCard = ({ incident }: IncidentCardProps) => {
             <SeverityBadgeSelector severity={incident.severity}/>
           </div>
         </div>
-        <CardDescription>{incident.title}</CardDescription>
+        <CardDescription>{incident.description}</CardDescription>
       </CardHeader>
       <CardContent className="grid gap-2">
         <div className="flex items-center justify-between">
